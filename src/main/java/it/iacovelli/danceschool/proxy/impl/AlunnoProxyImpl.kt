@@ -12,24 +12,15 @@ import it.iacovelli.danceschool.model.dto.CorsoDto
 import it.iacovelli.danceschool.model.dto.PagamentoDto
 import it.iacovelli.danceschool.proxy.AlunnoProxy
 import it.iacovelli.danceschool.service.AlunnoService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import kotlin.streams.toList
 
 @Component
-open class AlunnoProxyImpl : AlunnoProxy {
-
-    @Autowired
-    private lateinit var alunnoService: AlunnoService
-
-    @Autowired
-    private lateinit var alunnoMapper : AlunnoMapper
-
-    @Autowired
-    private lateinit var corsoMapper : CorsoMapper
-
-    @Autowired
-    private lateinit var pagamentoMapper : PagamentoMapper
+open class AlunnoProxyImpl(
+    private var alunnoService: AlunnoService,
+    private var alunnoMapper: AlunnoMapper,
+    private var corsoMapper: CorsoMapper,
+    private var pagamentoMapper: PagamentoMapper
+) : AlunnoProxy {
 
     override fun allActiveStudent(): List<AlunnoDto> {
         return alunnoService.allActiveStudent().stream().map { a -> alunnoMapper.alunnoToDto(a)}.toList()

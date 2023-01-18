@@ -4,16 +4,12 @@ import it.iacovelli.danceschool.exception.InsegnanteNotFoundException
 import it.iacovelli.danceschool.helper.BaseResponse
 import it.iacovelli.danceschool.model.dto.InsegnanteDto
 import it.iacovelli.danceschool.proxy.InsegnanteProxy
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/teacher")
-class InsegnanteController {
-
-    @Autowired
-    private lateinit var insegnanteProxy: InsegnanteProxy
+class InsegnanteController(private var insegnanteProxy: InsegnanteProxy) {
 
     @PutMapping("/")
     fun addInsegnante(@RequestBody insegnante: InsegnanteDto): BaseResponse<Void> {

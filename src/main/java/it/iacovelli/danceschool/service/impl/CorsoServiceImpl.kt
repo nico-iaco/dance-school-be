@@ -9,11 +9,9 @@ import it.iacovelli.danceschool.repository.CorsoRepository
 import it.iacovelli.danceschool.repository.IscrizioneRepository
 import it.iacovelli.danceschool.service.CorsoService
 import it.iacovelli.danceschool.service.InsegnanteService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.stereotype.Service
 import javax.transaction.Transactional
-import kotlin.streams.toList
 
 /**
  * This is the service class which exposes the course services
@@ -21,22 +19,17 @@ import kotlin.streams.toList
  * @author nicola.iacovelli
  */
 @Service
-open class CorsoServiceImpl : CorsoService {
-
+open class CorsoServiceImpl(
     /**
      * This is the repository to access to [Corso] entity
      */
-    @Autowired
-    private lateinit var corsoRepository: CorsoRepository
-
+    private var corsoRepository: CorsoRepository,
     /**
      * This is the repository to access to [Iscrizione] entity
      */
-    @Autowired
-    private lateinit var iscrizioneRepository: IscrizioneRepository
-
-    @Autowired
-    private lateinit var insegnanteService: InsegnanteService
+    private var iscrizioneRepository: IscrizioneRepository,
+    private var insegnanteService: InsegnanteService
+) : CorsoService {
 
     /**
      * This method will add a course to the database

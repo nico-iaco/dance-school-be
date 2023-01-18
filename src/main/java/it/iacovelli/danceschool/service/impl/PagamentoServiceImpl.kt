@@ -4,7 +4,6 @@ import it.iacovelli.danceschool.model.Pagamento
 import it.iacovelli.danceschool.model.dto.EarningDto
 import it.iacovelli.danceschool.repository.PagamentoRepository
 import it.iacovelli.danceschool.service.PagamentoService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 import java.time.LocalDate
@@ -15,13 +14,12 @@ import java.time.LocalDate
  * @author nicola.iacovelli
  */
 @Service
-open class PagamentoServiceImpl : PagamentoService {
-
+open class PagamentoServiceImpl(
     /**
      * This is the repository to access to [Pagamento] entity
      */
-    @Autowired
-    private lateinit var pagamentoRepository: PagamentoRepository
+    private var pagamentoRepository: PagamentoRepository
+) : PagamentoService {
 
     /**
      * This method is used to get the daily income

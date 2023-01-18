@@ -9,7 +9,7 @@ class BaseResponse<T> {
     var messages: MutableList<Message> = ArrayList()
 
     fun addMessage(code: HttpStatus, text: String?, messageType: MessageType): BaseResponse<T> {
-        var message = Message()
+        val message = Message()
         message.code = code.toString()
         message.text = text
         message.messageType = messageType

@@ -11,17 +11,13 @@ import it.iacovelli.danceschool.model.dto.AlunnoDto
 import it.iacovelli.danceschool.model.dto.CorsoDto
 import it.iacovelli.danceschool.model.dto.PagamentoDto
 import it.iacovelli.danceschool.proxy.AlunnoProxy
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/student")
 @Api(value = "Alunno Management System")
-class AlunnoController {
-
-    @Autowired
-    private lateinit var alunnoProxy: AlunnoProxy
+class AlunnoController(private var alunnoProxy: AlunnoProxy) {
 
     @GetMapping("/")
     @ApiOperation(value = "Get all active student")

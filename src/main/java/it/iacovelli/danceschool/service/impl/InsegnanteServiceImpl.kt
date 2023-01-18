@@ -4,14 +4,10 @@ import it.iacovelli.danceschool.exception.InsegnanteNotFoundException
 import it.iacovelli.danceschool.model.Insegnante
 import it.iacovelli.danceschool.repository.InsegnanteRepository
 import it.iacovelli.danceschool.service.InsegnanteService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class InsegnanteServiceImpl : InsegnanteService {
-
-    @Autowired
-    private lateinit var insegnanteRepository: InsegnanteRepository
+class InsegnanteServiceImpl(private var insegnanteRepository: InsegnanteRepository) : InsegnanteService {
 
     override fun addInsegnante(insegnante: Insegnante) {
         insegnanteRepository.save(insegnante)

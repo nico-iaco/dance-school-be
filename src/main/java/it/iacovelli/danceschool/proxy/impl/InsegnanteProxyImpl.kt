@@ -5,19 +5,14 @@ import it.iacovelli.danceschool.mapper.InsegnanteMapper
 import it.iacovelli.danceschool.model.dto.InsegnanteDto
 import it.iacovelli.danceschool.proxy.InsegnanteProxy
 import it.iacovelli.danceschool.service.InsegnanteService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Component
-import kotlin.streams.toList
 
 @Component
-open class InsegnanteProxyImpl : InsegnanteProxy {
-
-    @Autowired
-    private lateinit var insegnanteService: InsegnanteService
-
-    @Autowired
-    private lateinit var insegnanteMapper: InsegnanteMapper
+open class InsegnanteProxyImpl(
+    private var insegnanteService: InsegnanteService,
+    private var insegnanteMapper: InsegnanteMapper
+) : InsegnanteProxy {
 
     override fun addInsegnante(insegnanteDto: InsegnanteDto) {
         val insegnante = insegnanteMapper.dtoToInsegnante(insegnanteDto)

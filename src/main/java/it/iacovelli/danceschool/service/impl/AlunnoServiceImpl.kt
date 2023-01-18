@@ -14,12 +14,10 @@ import it.iacovelli.danceschool.repository.IscrizioneRepository
 import it.iacovelli.danceschool.repository.PagamentoRepository
 import it.iacovelli.danceschool.service.AlunnoService
 import it.iacovelli.danceschool.service.CorsoService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 import javax.transaction.Transactional
-import kotlin.streams.toList
 
 /**
  * This is the service class which exposes the student services
@@ -27,34 +25,25 @@ import kotlin.streams.toList
  * @author nicola.iacovelli
  */
 @Service
-open class AlunnoServiceImpl : AlunnoService {
-
+open class AlunnoServiceImpl(
     /**
      * This is the repository to access to [Alunno] entity
      */
-    @Autowired
-    private lateinit var alunnoRepository: AlunnoRepository
-
+    private var alunnoRepository: AlunnoRepository,
     /**
      * This is the class to access to [Corso] data
      */
-    @Autowired
-    private lateinit var corsoService: CorsoService
-
+    private var corsoService: CorsoService,
     /**
      * This is the repository to access to [Iscrizione] entity
      */
-    @Autowired
-    private lateinit var iscrizioneRepository: IscrizioneRepository
-
+    private var iscrizioneRepository: IscrizioneRepository,
     /**
      * This is the repository to access to [Pagamento] entity
      */
-    @Autowired
-    private lateinit var pagamentoRepository: PagamentoRepository
-
-    @Autowired
-    private lateinit var pagamentoMapper : PagamentoMapper
+    private var pagamentoRepository: PagamentoRepository,
+    private var pagamentoMapper: PagamentoMapper
+) : AlunnoService {
 
     /**
      * This method will add a student to the database
@@ -64,7 +53,6 @@ open class AlunnoServiceImpl : AlunnoService {
      */
     @Throws(AlunnoAlreadyExistsException::class)
     override fun addStudent(alunno: Alunno) {
-
         try {
             alunno.active = true
             val present = alunnoRepository.getAlunnoByFiscalCode(alunno.fiscalCode).isPresent

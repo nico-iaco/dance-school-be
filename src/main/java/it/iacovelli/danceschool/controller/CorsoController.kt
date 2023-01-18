@@ -7,16 +7,12 @@ import it.iacovelli.danceschool.helper.MessageType
 import it.iacovelli.danceschool.model.dto.AlunnoDto
 import it.iacovelli.danceschool.model.dto.CorsoDto
 import it.iacovelli.danceschool.proxy.CorsoProxy
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/course")
-class CorsoController {
-
-    @Autowired
-    private lateinit var corsoProxy: CorsoProxy
+class CorsoController(private var corsoProxy: CorsoProxy) {
 
     @GetMapping("/")
     @ApiOperation(value = "Get all active course")

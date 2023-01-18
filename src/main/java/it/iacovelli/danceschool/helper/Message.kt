@@ -10,8 +10,6 @@ class Message {
 
     var messageType: MessageType? = null
 
-    var isError: Boolean? = false
-
     constructor() {
 
     }

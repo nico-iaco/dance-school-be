@@ -3,16 +3,12 @@ package it.iacovelli.danceschool.proxy.impl
 import it.iacovelli.danceschool.model.dto.EarningDto
 import it.iacovelli.danceschool.proxy.PagamentoProxy
 import it.iacovelli.danceschool.service.PagamentoService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 import java.time.LocalDate
 
 @Component
-class PagamentoProxyImpl : PagamentoProxy {
-
-    @Autowired
-    private lateinit var pagamentoService: PagamentoService
+class PagamentoProxyImpl(private var pagamentoService: PagamentoService) : PagamentoProxy {
 
     override fun getDailyEarnings(date: LocalDate): EarningDto {
         return pagamentoService.getDailyEarnings(date)

@@ -6,7 +6,6 @@ import it.iacovelli.danceschool.model.dto.EarningDto
 import it.iacovelli.danceschool.model.dto.SubscriptionDto
 import it.iacovelli.danceschool.proxy.CorsoProxy
 import it.iacovelli.danceschool.proxy.PagamentoProxy
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -17,13 +16,8 @@ import java.time.Period
 
 @RestController
 @RequestMapping("/report")
-class ReportController {
-
-    @Autowired
-    private lateinit var pagamentoProxy: PagamentoProxy
-
-    @Autowired
-    private lateinit var corsoProxy: CorsoProxy
+class ReportController(private var pagamentoProxy: PagamentoProxy,
+                       private var corsoProxy: CorsoProxy) {
 
     @GetMapping("/earning/daily/{year}/{month}/{day}")
     @ApiOperation(value = "Get the earning of a day")

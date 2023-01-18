@@ -15,10 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebSecurity
-open class SpringSecurityConfig : WebSecurityConfigurerAdapter() {
-
-    @Autowired
-    private val authEntryPoint: AuthenticationEntryPoint? = null
+open class SpringSecurityConfig(private val authEntryPoint: AuthenticationEntryPoint) : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
