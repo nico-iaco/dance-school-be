@@ -1,0 +1,35 @@
+@startuml
+
+header Dance-school
+footer Nicola Iacovelli
+
+actor Client
+
+title Aggiungi corso sequence diagram
+
+== Login ==
+Client -> LoginController: Authentication Request
+Client <-- LoginController: Authentication Response
+
+== Aggiungi Corso ==
+Client -> CorsoController: PUT /course/
+activate CorsoController
+CorsoController -> CorsoProxy: corsoProxy.addCourse(course)
+activate CorsoProxy
+CorsoProxy -> CorsoService: corsoService.addCourse(course)
+activate CorsoService
+CorsoService -> CorsoRepository: corsoRepository.save(course)
+activate CorsoRepository
+database DB
+CorsoRepository -> DB: Save entity
+CorsoRepository <- DB: Entity detached
+return Entity detached
+return Entity id
+return Entity id
+return HTTP_STATUS.CREATED
+
+== Logout ==
+Client -> LoginController: Logout Request
+Client <-- LoginController: Logout Response
+
+@enduml

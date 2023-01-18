@@ -1,0 +1,53 @@
+@startuml
+
+header Dance-school
+footer Nicola Iacovelli
+
+actor Client
+
+title Aggiungi Pagamento sequence diagram
+
+== Login ==
+Client -> LoginController: Authentication Request
+Client <-- LoginController: Authentication Response
+
+== Aggiungi pagamento ==
+Client -> AlunnoController: PUT /student/{matricola}/payment
+activate AlunnoController
+AlunnoController -> AlunnoProxy: alunnoProxy.addStudentPayment(matricola, payment)
+activate AlunnoProxy
+AlunnoProxy -> AlunnoService: alunnoService.addStudentPayment(matricola, payment)
+activate AlunnoService
+AlunnoService -> AlunnoService: alunnoService.getStudenteByMatricola(matricola)
+activate AlunnoService
+database redis
+AlunnoService -> redis: Check in cache
+AlunnoService <- redis: Ottieni l'alunno se in cache
+return Alunno se in cache
+
+AlunnoService -> AlunnoRepository: alunnoRepository.GetStudenteByMatricola(matricola)
+note right of AlunnoService
+    Questa chiamata verrà effettuato solo
+    se lo studente non è in cache.
+    Se lo studente è in cache si passa
+    direttamente al save dell'iscrizione
+end note
+database DB
+AlunnoRepository -> DB: Query
+AlunnoRepository <- DB: Result
+AlunnoService <-- AlunnoRepository: Alunno se presente
+AlunnoController <-- AlunnoService: AlunnoNotFoundException se l'alunno \n non è presente
+Client <-- AlunnoController: HTTP_STATUS.NOT_FOUND
+AlunnoService -> PagamentoRepository: pagamentoRepository.save(payment)
+PagamentoRepository -> DB: Save entity
+PagamentoRepository <- DB: Entity detached
+AlunnoService <-- PagamentoRepository: Entity detached
+return Entity ID
+return HTTP_STATUS.CREATED
+
+
+== Logout ==
+Client -> LoginController: Logout Request
+Client <-- LoginController: Logout Response
+
+@enduml

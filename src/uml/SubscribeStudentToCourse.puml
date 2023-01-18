@@ -1,0 +1,49 @@
+@startuml
+
+header Dance-school
+footer Nicola Iacovelli
+
+actor Client
+
+title Iscrivi studente a corso sequence diagram
+
+== Login ==
+Client -> LoginController: Authentication Request
+Client <-- LoginController: Authentication Response
+
+== Iscrivi studente ==
+Client -> AlunnoController: POST /student/{matricola}/course/{id}
+activate AlunnoController
+AlunnoController -> AlunnoProxy: alunnoProxy.subscribeStudent(matricola, id)
+activate AlunnoProxy
+AlunnoProxy -> AlunnoService: alunnoService.subscribeStudent(matricola, id)
+activate AlunnoService
+
+AlunnoService -> AlunnoService: alunnoService.getAlunnoByMatricola(matricola)
+activate AlunnoService
+return Alunno se presente oppure AlunnoNotFoundException
+AlunnoProxy <-- AlunnoService: AlunnoNotFoundException se l'alunno \n non è stato trovato
+AlunnoController <-- AlunnoProxy: AlunnoNotFoundException se l'alunno \n non è stato trovato
+Client <-- AlunnoController: HTTP_STATUS.NOT_FOUND
+
+AlunnoService -> CorsoService: corsoService.getCorsoById(id)
+activate CorsoService
+return Corso se presente oppure CorsoNotFoundException
+AlunnoProxy <-- AlunnoService: CorsoNotFoundException se il corso \n non è stato trovato
+AlunnoController <-- AlunnoService: CorsoNotFoundException se il corso \n non è stato trovato
+Client <-- AlunnoController: HTTP_STATUS.NOT_FOUND
+
+AlunnoService -> IscrizioneRepository: iscrizioneRepository.save(iscrizione)
+IscrizioneRepository -> DB: Save entity
+IscrizioneRepository <- DB: Entity detached
+AlunnoService <-- IscrizioneRepository: Entity detached
+return Entity detached
+return
+return HTTP_STATUS.CREATED
+
+
+== Logout ==
+Client -> LoginController: Logout Request
+Client <-- LoginController: Logout Response
+
+@enduml

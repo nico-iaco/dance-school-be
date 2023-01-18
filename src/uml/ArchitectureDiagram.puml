@@ -1,0 +1,26 @@
+@startuml
+
+header Dance-school
+footer Nicola Iacovelli
+
+actor Client
+title Sequenza Chiamate
+
+Client -> RestController: Chiamate REST
+RestController -> Service_Proxy: Chiamata a servizi
+database Redis
+Service_Proxy -> Redis: Verifica in cache
+Redis ->x Redis: Non presente in cache
+Service_Proxy <- Redis: Presente in cache
+RestController <-- Service_Proxy: Ritorno dati presenti in cache
+Client <-- RestController: Dati richiesti
+Service_Proxy -> Repository: Chiamata al repository se il dato non è in cache
+database DB
+Repository -> DB: Query
+Repository <- DB: Entity
+Service_Proxy <-- Repository: Entity
+Service_Proxy ->> Redis: Salvataggio in cache
+RestController <-- Service_Proxy: Ritorno dati presi dal DB
+Client <-- RestController: Dati richiesti
+
+@enduml
