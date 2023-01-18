@@ -1,9 +1,9 @@
 package it.iacovelli.danceschool.model
 
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.OneToMany
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.OneToMany
 
 /**
  * This is the model of Insegnante

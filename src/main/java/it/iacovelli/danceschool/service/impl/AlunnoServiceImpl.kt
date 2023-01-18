@@ -17,7 +17,7 @@ import it.iacovelli.danceschool.service.CorsoService
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
 import java.time.LocalDate
-import javax.transaction.Transactional
+import jakarta.transaction.Transactional
 
 /**
  * This is the service class which exposes the student services

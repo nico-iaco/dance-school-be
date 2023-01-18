@@ -1,8 +1,8 @@
 package it.iacovelli.danceschool.model
 
 import it.iacovelli.danceschool.model.type.GenderType
+import jakarta.persistence.*
 import java.time.LocalDate
-import javax.persistence.*
 
 /**
  * This is the base model of Alunno & Insegnante.

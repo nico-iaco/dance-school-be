@@ -1,8 +1,8 @@
 package it.iacovelli.danceschool.model
 
+import jakarta.persistence.*
 import java.io.Serializable
 import java.util.*
-import javax.persistence.*
 
 /**
  * This is the model of Corso

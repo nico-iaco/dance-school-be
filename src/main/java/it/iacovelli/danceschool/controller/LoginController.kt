@@ -3,6 +3,8 @@ package it.iacovelli.danceschool.controller
 import io.swagger.annotations.ApiOperation
 import it.iacovelli.danceschool.helper.BaseResponse
 import it.iacovelli.danceschool.helper.MessageType
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
@@ -10,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 @RestController
 @RequestMapping("/security")

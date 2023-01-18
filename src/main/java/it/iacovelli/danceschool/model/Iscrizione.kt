@@ -1,8 +1,8 @@
 package it.iacovelli.danceschool.model
 
+import jakarta.persistence.*
 import java.io.Serializable
 import java.time.LocalDate
-import javax.persistence.*
 
 /**
  * This is the linking relation between [Alunno] and [Corso]

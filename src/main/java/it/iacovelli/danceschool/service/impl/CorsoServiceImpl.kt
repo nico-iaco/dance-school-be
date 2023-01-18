@@ -11,7 +11,7 @@ import it.iacovelli.danceschool.service.CorsoService
 import it.iacovelli.danceschool.service.InsegnanteService
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.stereotype.Service
-import javax.transaction.Transactional
+import jakarta.transaction.Transactional
 
 /**
  * This is the service class which exposes the course services

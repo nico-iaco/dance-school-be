@@ -2,7 +2,7 @@ package it.iacovelli.danceschool.model
 
 import java.io.Serializable
 import java.time.LocalDate
-import javax.persistence.*
+import jakarta.persistence.*
 
 /**
  * This is the Pagamento model

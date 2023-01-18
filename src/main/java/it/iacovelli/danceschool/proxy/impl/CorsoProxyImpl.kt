@@ -9,7 +9,7 @@ import it.iacovelli.danceschool.model.dto.SubscriptionDto
 import it.iacovelli.danceschool.proxy.CorsoProxy
 import it.iacovelli.danceschool.service.CorsoService
 import org.springframework.stereotype.Component
-import javax.transaction.Transactional
+import jakarta.transaction.Transactional
 
 @Component
 open class CorsoProxyImpl(
