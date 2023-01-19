@@ -15,7 +15,6 @@ interface AlunnoService {
     @Throws(AlunnoAlreadyExistsException::class)
     fun addStudent(alunno: Alunno)
 
-    @Throws(AlunnoNotFoundException::class)
     fun editStudent(alunno: Alunno)
 
     @Throws(AlunnoNotFoundException::class)

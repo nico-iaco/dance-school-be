@@ -11,7 +11,6 @@ interface CorsoService {
 
     fun addCourse(corso: Corso, fiscalCode: String): Long
 
-    @Throws(CorsoNotFoundException::class)
     fun editCorso(corso: Corso)
 
     @Throws(CorsoNotFoundException::class)

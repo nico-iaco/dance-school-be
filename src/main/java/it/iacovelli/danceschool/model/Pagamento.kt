@@ -1,8 +1,8 @@
 package it.iacovelli.danceschool.model
 
+import jakarta.persistence.*
 import java.io.Serializable
 import java.time.LocalDate
-import jakarta.persistence.*
 
 /**
  * This is the Pagamento model
@@ -20,7 +20,7 @@ class Pagamento : Serializable {
     var amount: Double = 0.toDouble()
 
     @Column(name = "payment_date", columnDefinition = "DATE")
-    var paymentDate: LocalDate? = null
+    var paymentDate: LocalDate = LocalDate.now()
 
     @Column(name = "related_course", length = 100)
     var relatedCourse: String? = null

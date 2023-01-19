@@ -21,7 +21,8 @@ open class InsegnanteProxyImpl(
 
     @Throws(InsegnanteNotFoundException::class)
     override fun editInsegnante(insegnanteDto: InsegnanteDto) {
-        val insegnante = insegnanteMapper.dtoToInsegnante(insegnanteDto)
+        val insegnante = insegnanteService.getInsegnanteByFiscalCode(insegnanteDto.fiscalCode)
+        insegnanteMapper.updateInsegnanteFromDto(insegnanteDto, insegnante)
         insegnanteService.editInsegnante(insegnante)
     }
 

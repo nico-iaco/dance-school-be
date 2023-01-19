@@ -2,7 +2,6 @@ package it.iacovelli.danceschool.model
 
 import jakarta.persistence.*
 import java.io.Serializable
-import java.util.*
 
 /**
  * This is the model of Corso
@@ -27,8 +26,8 @@ class Corso : Serializable {
     /**
      * This field represents the name of the course, its max length is 100 character
      */
-    @Column(name = "name", length = 100)
-    var name: String? = null
+    @Column(name = "name", length = 100, nullable = false)
+    lateinit var name: String
 
     /**
      * This field represents the description of the course

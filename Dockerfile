@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:17-jdk-alpine
 
 LABEL mantainer="nicolaiacovelli98@gmail.com"
 EXPOSE 8080

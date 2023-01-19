@@ -29,38 +29,38 @@ abstract class Person {
      * This field represents the student/teacher name, its max length is 50 character and cannot be null
      */
     @Column(name = "name", length = 50, nullable = false)
-    var name: String? = null
+    lateinit var name: String
 
     /**
      * This field represents the student/teacher surname, its max length is 50 character and cannot be null
      */
     @Column(name = "surname", length = 50, nullable = false)
-    var surname: String? = null
+    lateinit var surname: String
 
     /**
      * This field represents where the student/teacher was born, its max length is 100 character and cannot be null
      */
     @Column(name = "birthdayPlace", length = 100, nullable = false)
-    var birthdayPlace: String? = null
+    lateinit var birthdayPlace: String
 
     /**
      * This field represents the gender of the student/teacher
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", length = 10)
-    var gender: GenderType? = null
+    var gender: GenderType = GenderType.NOT_BINARY
 
     /**
      * This field represents the birthday of the student/teacher
      */
     @Column(name = "birthday", columnDefinition = "DATE")
-    var birthday: LocalDate? = null
+    var birthday: LocalDate = LocalDate.now()
 
     /**
      * This field represents the telephone number of the student/teacher, its max length is 10 character and cannot be null
      */
     @Column(name = "telephone", length = 10, nullable = false)
-    var telephone: String? = null
+    lateinit var telephone: String
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

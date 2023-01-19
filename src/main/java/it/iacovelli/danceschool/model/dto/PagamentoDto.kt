@@ -15,7 +15,7 @@ import java.time.LocalDate
 class PagamentoDto : Serializable {
 
     @ApiModelProperty(notes = "The database generated payment ID")
-    var id: Long? = null
+    var id: Long = 0
 
     @ApiModelProperty(notes = "The amount of the payment")
     var amount: Double = 0.0
@@ -29,7 +29,7 @@ class PagamentoDto : Serializable {
     @ApiModelProperty(notes = "The ID of the student which made the payment")
     var studentId: String = ""
 
-    constructor(id: Long?, amount: Double, paymentDate: LocalDate, relatedCourse: String, studentId: String) {
+    constructor(id: Long, amount: Double, paymentDate: LocalDate, relatedCourse: String, studentId: String) {
         this.id = id
         this.amount = amount
         this.paymentDate = paymentDate
@@ -53,7 +53,7 @@ class PagamentoDto : Serializable {
     }
 
     override fun hashCode(): Int {
-        return id?.hashCode() ?: 0
+        return id.hashCode()
     }
 
     override fun toString(): String {

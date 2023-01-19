@@ -13,11 +13,8 @@ class InsegnanteServiceImpl(private var insegnanteRepository: InsegnanteReposito
         insegnanteRepository.save(insegnante)
     }
 
-    @Throws(InsegnanteNotFoundException::class)
     override fun editInsegnante(insegnante: Insegnante) {
-        val dbTeacher = getInsegnanteByFiscalCode(insegnante.fiscalCode)
-        insegnanteUpdater(dbTeacher, insegnante)
-        insegnanteRepository.save(dbTeacher)
+        insegnanteRepository.save(insegnante)
     }
 
     @Throws(InsegnanteNotFoundException::class)
@@ -27,11 +24,6 @@ class InsegnanteServiceImpl(private var insegnanteRepository: InsegnanteReposito
 
     override fun allActiveTeacher(): List<Insegnante> {
         return insegnanteRepository.getAllByActiveTrue()
-    }
-
-    private fun insegnanteUpdater(oldTeacher : Insegnante, newTeacher : Insegnante) {
-        oldTeacher.salary = newTeacher.salary
-        oldTeacher.telephone = newTeacher.telephone
     }
 
 }

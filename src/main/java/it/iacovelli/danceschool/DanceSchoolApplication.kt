@@ -23,7 +23,7 @@ open class DanceSchoolApplication {
     @Throws(IOException::class)
     private fun initializeFirebase() {
         val serviceAccount = URL(serviceAccountUrl).openStream()
-        val options = FirebaseOptions.Builder()
+        val options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .setDatabaseUrl(databaseUrl)
                 .build()

@@ -14,10 +14,10 @@ import it.iacovelli.danceschool.repository.IscrizioneRepository
 import it.iacovelli.danceschool.repository.PagamentoRepository
 import it.iacovelli.danceschool.service.AlunnoService
 import it.iacovelli.danceschool.service.CorsoService
+import jakarta.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
 import java.time.LocalDate
-import jakarta.transaction.Transactional
 
 /**
  * This is the service class which exposes the student services
@@ -69,13 +69,9 @@ open class AlunnoServiceImpl(
     /**
      * This method will edit an existing user
      * @param alunno the object with the new information about the student
-     * @throws AlunnoNotFoundException if the student was not found
      */
-    @Throws(AlunnoNotFoundException::class)
     override fun editStudent(alunno: Alunno) {
-        val student = getStudentByFiscalCode(alunno.fiscalCode)
-        updateStudent(student, alunno)
-        alunnoRepository.save(student)
+        alunnoRepository.save(alunno)
     }
 
     /**
@@ -166,21 +162,6 @@ open class AlunnoServiceImpl(
     override fun setAlunnoState(state: Boolean, fiscalCode: String) {
         getStudentByFiscalCode(fiscalCode)
         alunnoRepository.setAlunnoState(state, fiscalCode)
-    }
-
-    /**
-     * This method will set the new information about the student into the detached instance from the db
-     * @param studentToEdit the detached instance of student from the db
-     * @param newStudent the instance with new information about the student from the client
-     */
-    private fun updateStudent(studentToEdit: Alunno, newStudent: Alunno) {
-        studentToEdit.name = newStudent.name
-        studentToEdit.surname = newStudent.surname
-        studentToEdit.active = newStudent.active
-        studentToEdit.address = newStudent.address
-        studentToEdit.city = newStudent.city
-        studentToEdit.cap = newStudent.cap
-        studentToEdit.telephone = newStudent.telephone
     }
 
 }

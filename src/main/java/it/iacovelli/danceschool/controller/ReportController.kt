@@ -24,7 +24,7 @@ class ReportController(private var pagamentoProxy: PagamentoProxy,
     fun dailyEarnings(@PathVariable("year") year: Int, @PathVariable("month") month: Int, @PathVariable("day") day: Int): BaseResponse<EarningDto> {
         val response = BaseResponse<EarningDto>()
         val d = LocalDate.of(year, month, day)
-        val dailyEarnings = pagamentoProxy!!.getDailyEarnings(d)
+        val dailyEarnings = pagamentoProxy.getDailyEarnings(d)
         response.body = dailyEarnings
         return response
     }
@@ -35,7 +35,7 @@ class ReportController(private var pagamentoProxy: PagamentoProxy,
         val response = BaseResponse<EarningDto>()
         val startDate = LocalDate.parse(start)
         val endDate = LocalDate.parse(end)
-        val periodEarnings = pagamentoProxy!!.getPeriodEarnings(startDate, endDate)
+        val periodEarnings = pagamentoProxy.getPeriodEarnings(startDate, endDate)
         periodEarnings.period = Period.between(startDate, endDate)
         response.body = periodEarnings
         return response
@@ -45,7 +45,7 @@ class ReportController(private var pagamentoProxy: PagamentoProxy,
     @ApiOperation(value = "Get the subscriptions of a month")
     fun getSubscriptionForMonth(@PathVariable("month") month: String, @PathVariable("year") year: String): BaseResponse<SubscriptionDto> {
         val response = BaseResponse<SubscriptionDto>()
-        val numberSubscribersForMonth = corsoProxy!!.getNumberSubscribersForMonth(month, year)
+        val numberSubscribersForMonth = corsoProxy.getNumberSubscribersForMonth(month, year)
         response.body = numberSubscribersForMonth
         return response
     }
@@ -54,7 +54,7 @@ class ReportController(private var pagamentoProxy: PagamentoProxy,
     @ApiOperation(value = "Get the subscriptions of the year")
     fun getSubscriptionForYear(@PathVariable("year") year: String): BaseResponse<SubscriptionDto> {
         val response = BaseResponse<SubscriptionDto>()
-        val numberSubscribersForYear = corsoProxy!!.getNumberSubscribersForYear(year)
+        val numberSubscribersForYear = corsoProxy.getNumberSubscribersForYear(year)
         response.body = numberSubscribersForYear
         return response
     }

@@ -14,7 +14,7 @@ import java.time.LocalDate
  */
 class InsegnanteDto : Serializable {
 
-    var active: Boolean? = true
+    var active: Boolean = true
 
     lateinit var name: String
 
@@ -24,13 +24,13 @@ class InsegnanteDto : Serializable {
 
     lateinit var fiscalCode: String
 
-    var gender: GenderType? = GenderType.NOT_BINARY
+    var gender: GenderType = GenderType.NOT_BINARY
 
-    var birthday: LocalDate? = LocalDate.now()
+    var birthday: LocalDate = LocalDate.now()
 
     lateinit var telephone: String
 
-    var salary: Double? = 0.0
+    var salary: Double = 0.0
 
     var taughtCourses: Int = 0
 
@@ -45,7 +45,7 @@ class InsegnanteDto : Serializable {
 
     override fun hashCode(): Int {
         var result = fiscalCode.hashCode()
-        result = 31 * result + (fiscalCode?.hashCode() ?: 0)
+        result = 31 * result + (fiscalCode.hashCode())
         return result
     }
 

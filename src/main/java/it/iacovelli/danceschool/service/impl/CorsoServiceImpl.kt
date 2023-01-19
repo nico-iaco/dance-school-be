@@ -9,9 +9,9 @@ import it.iacovelli.danceschool.repository.CorsoRepository
 import it.iacovelli.danceschool.repository.IscrizioneRepository
 import it.iacovelli.danceschool.service.CorsoService
 import it.iacovelli.danceschool.service.InsegnanteService
+import jakarta.transaction.Transactional
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.stereotype.Service
-import jakarta.transaction.Transactional
 
 /**
  * This is the service class which exposes the course services
@@ -48,14 +48,10 @@ open class CorsoServiceImpl(
     /**
      * This method will edit an existing course
      * @param corso the object with new information about the course
-     * @throws CorsoNotFoundException if the course was not found
      */
     @CacheEvict(cacheNames = ["corsi"])
-    @Throws(CorsoNotFoundException::class)
     override fun editCorso(corso: Corso) {
-        val corsoById = getCorsoById(corso.id)
-        updateCorso(corsoById, corso)
-        corsoRepository.save(corsoById)
+        corsoRepository.save(corso)
     }
 
     /**
@@ -84,8 +80,9 @@ open class CorsoServiceImpl(
      */
     @Throws(CorsoNotFoundException::class)
     override fun setCorsoActivated(state: Boolean, courseId: Long) {
-        getCorsoById(courseId)
-        corsoRepository.setCourseState(state, courseId)
+        val corso = getCorsoById(courseId)
+        corso.active = state
+        corsoRepository.save(corso)
     }
 
     /**
@@ -119,12 +116,6 @@ open class CorsoServiceImpl(
      */
     override fun getNumberSubscribersForYear(year: String): SubscriptionDto {
         return iscrizioneRepository.getNumberSubscriptionForYear(year)
-    }
-
-    private fun updateCorso(courseToEdit: Corso, newCourse: Corso) {
-        courseToEdit.name = newCourse.name
-        courseToEdit.description = newCourse.description
-        courseToEdit.active = newCourse.active
     }
 
 }

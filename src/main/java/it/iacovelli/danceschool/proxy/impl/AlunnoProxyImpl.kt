@@ -40,7 +40,8 @@ open class AlunnoProxyImpl(
 
     @Throws(AlunnoNotFoundException::class)
     override fun editStudent(alunnoDto: AlunnoDto) {
-        val alunno = alunnoMapper.dtoToAlunno(alunnoDto)
+        val alunno = alunnoService.getStudentByFiscalCode(alunnoDto.fiscalCode)
+        alunnoMapper.updateAlunnoFromDto(alunnoDto, alunno)
         alunnoService.editStudent(alunno)
     }
 

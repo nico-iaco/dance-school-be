@@ -4,7 +4,6 @@ import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.OneToMany
 import java.io.Serializable
-import java.util.*
 
 /**
  * This is the model of Alunno.
@@ -18,7 +17,7 @@ class Alunno : Person(), Serializable {
      * This field represents the parent fiscal code, its max length is 16 character and cannot be null
      */
     @Column(name = "parent_fiscal_code", length = 16, nullable = false)
-    var parentFiscalCode: String? = null
+    var parentFiscalCode: String = ""
 
     /**
      * This field represents the city where the student lives, its max length is 100 character

@@ -14,7 +14,7 @@ import java.io.Serializable
 class CorsoDto : Serializable {
 
     @ApiModelProperty(notes = "The database generated course ID")
-    var id: Long? = null
+    var id: Long = 0
 
     @ApiModelProperty(notes = "The course name")
     lateinit var name: String
@@ -23,7 +23,7 @@ class CorsoDto : Serializable {
     var description: String? = null
 
     @ApiModelProperty(notes = "The number of student enrolled")
-    var subscribedStudent: Int? = 0
+    var subscribedStudent: Int = 0
 
     var teacher: InsegnanteDto? = null
 

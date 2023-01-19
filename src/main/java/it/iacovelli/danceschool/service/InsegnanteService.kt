@@ -9,7 +9,6 @@ interface InsegnanteService {
 
     fun addInsegnante(insegnante: Insegnante)
 
-    @Throws(InsegnanteNotFoundException::class)
     fun editInsegnante(insegnante: Insegnante)
 
     @Throws(InsegnanteNotFoundException::class)

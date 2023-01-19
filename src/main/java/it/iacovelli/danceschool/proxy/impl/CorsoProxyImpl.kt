@@ -8,8 +8,8 @@ import it.iacovelli.danceschool.model.dto.CorsoDto
 import it.iacovelli.danceschool.model.dto.SubscriptionDto
 import it.iacovelli.danceschool.proxy.CorsoProxy
 import it.iacovelli.danceschool.service.CorsoService
-import org.springframework.stereotype.Component
 import jakarta.transaction.Transactional
+import org.springframework.stereotype.Component
 
 @Component
 open class CorsoProxyImpl(
@@ -25,7 +25,8 @@ open class CorsoProxyImpl(
 
     @Throws(CorsoNotFoundException::class)
     override fun editCourse(corsoDto: CorsoDto) {
-        val corso = corsoMapper.dtoToCorso(corsoDto)
+        val corso = corsoService.getCorsoById(corsoDto.id)
+        corsoMapper.updateCorsoFromDto(corsoDto, corso)
         corsoService.editCorso(corso)
     }
 
@@ -38,7 +39,7 @@ open class CorsoProxyImpl(
 
     @Transactional
     override fun getAllActiveCourse(): List<CorsoDto> {
-        return corsoService.allActiveCourse().stream().map { c -> corsoMapper!!.corsoToDto(c) }.toList()
+        return corsoService.allActiveCourse().stream().map { c -> corsoMapper.corsoToDto(c) }.toList()
     }
 
     @Throws(CorsoNotFoundException::class)
@@ -48,7 +49,7 @@ open class CorsoProxyImpl(
 
     @Throws(CorsoNotFoundException::class)
     override fun getStudentsOfCourse(id: Long): List<AlunnoDto> {
-        return corsoService.getStudentsOfCourse(id).stream().map { a -> alunnoMapper!!.alunnoToDto(a) }.toList()
+        return corsoService.getStudentsOfCourse(id).stream().map { a -> alunnoMapper.alunnoToDto(a) }.toList()
     }
 
     override fun getNumberSubscribersForMonth(month: String, year: String): SubscriptionDto {
